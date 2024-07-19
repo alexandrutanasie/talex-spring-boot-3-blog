@@ -31,10 +31,10 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void seedUsers() {
-        if (siteUserRepository.findByEmail("demo@sapi.ro") == null) {
+        if (siteUserRepository.findByEmail("demo@t-alex.ro") == null) {
 
             SiteUser adminUser = new SiteUser();
-            adminUser.setEmail("demo@sapi.ro");
+            adminUser.setEmail("demo@t-alex.ro");
             adminUser.setFirstName("Demo");
             adminUser.setLastName("Admin");
             adminUser.setPassword("demo");
