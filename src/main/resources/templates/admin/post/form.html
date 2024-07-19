@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/main}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Post</title>
+</head>
+
+<body id="page-top">
+    <div layout:fragment="content-title">
+        Post
+    </div>
+
+    <div layout:fragment="content">
+        <form method="post" role="form" th:action="@{/admin/post/save}" th:object="${post}">
+            <input class="form-control" id="id" name="id" th:field="*{id}" type="hidden" />
+            <div class="form-group mb-3">
+                <label class="form-label">Title</label>
+                <input class="form-control" id="title" name="title" placeholder="Title"
+                    th:field="*{title}" type="text" />
+                <p th:errors="*{title}" class="text-danger" th:if="${#fields.hasErrors('title')}"></p>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Meta title</label>
+                <input class="form-control" id="metaTitle" name="title" placeholder="Meta title"
+                    th:field="*{metaTitle}" type="text" />
+                
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Url</label>
+                <input class="form-control" id="url" name="url" placeholder="Url"
+                    th:field="*{url}" type="text" />
+                <p th:errors="*{url}" class="text-danger" th:if="${#fields.hasErrors('url')}"></p>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" placeholder="content"
+                    th:field="*{content}" type="text" ></textarea>
+                <p th:errors="*{content}" class="text-danger" th:if="${#fields.hasErrors('content')}"></p>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Categories:</label>
+                <select class="select2 form-control" multiple="multiple" th:field="*{categories}">
+                    <option th:each="category : ${allCategories}" th:value="${category.id}" th:text="${category.title}"></option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Status:</label>
+                <div>
+                    <label><input type="radio" th:field="*{status}" value="1" /> Active</label>
+                    <label><input type="radio" th:field="*{status}" value="0" /> Inactive</label>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <button class="btn btn-primary btn-icon-split" type="submit">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus-circle"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" layout:fragment="footer-scripts" >
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+</body>
+
+</html>
